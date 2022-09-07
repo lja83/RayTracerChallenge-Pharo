@@ -9,7 +9,7 @@ RTCTupleTest >> testNewPoint [
 	"A tuple with w = 1.0 is a point"
 	
 	| p p2 |
-	p := RTCPoint new
+	p := RTCTuple newPoint
 			x: 4.3;
 			y: -4.2;
 			z: 3.1.
@@ -26,7 +26,7 @@ RTCTupleTest >> testNewVector [
 	"A tuple with w = 1.0 is a point"
 	
 	| v v2 |
-	v := RTCVector new
+	v := RTCTuple newVector
 			x: 4.3;
 			y: -4.2;
 			z: 3.1.

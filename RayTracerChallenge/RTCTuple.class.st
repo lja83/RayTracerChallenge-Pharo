@@ -13,6 +13,18 @@ Class {
 	#category : #RayTracerChallenge
 }
 
+{ #category : #'instance creation' }
+RTCTuple class >> newPoint [
+			
+	^ self new w: 1.0
+]
+
+{ #category : #'instance creation' }
+RTCTuple class >> newVector [
+			
+	^ self new w: 0.0
+]
+
 { #category : #comparing }
 RTCTuple >> =~ aRTCTuple [ 
 	^ (x =~ aRTCTuple x) & (y =~ aRTCTuple y) & (z =~ aRTCTuple z) & (w =~ aRTCTuple w). 
