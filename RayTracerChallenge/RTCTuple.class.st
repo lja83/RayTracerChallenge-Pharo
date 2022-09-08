@@ -25,9 +25,42 @@ RTCTuple class >> newVector [
 	^ self new w: 0.0
 ]
 
+{ #category : #'instance creation' }
+RTCTuple class >> newZeroVector [
+	^ self newVector x: 0; y: 0; z: 0.
+]
+
+{ #category : #comparing }
+RTCTuple >> + aRTCTuple [ 
+	^ self class new
+		x: x + aRTCTuple x;
+		y: y + aRTCTuple y;
+		z: z + aRTCTuple z;
+		w: w + aRTCTuple w.
+]
+
+{ #category : #comparing }
+RTCTuple >> - aRTCTuple [ 
+	^ self class new
+		x: x - aRTCTuple x;
+		y: y - aRTCTuple y;
+		z: z - aRTCTuple z;
+		w: w - aRTCTuple w.
+]
+
+{ #category : #comparing }
+RTCTuple >> = aRTCTuple [ 
+	^ (x =~ aRTCTuple x) & (y =~ aRTCTuple y) & (z =~ aRTCTuple z) & (w =~ aRTCTuple w). 
+]
+
 { #category : #comparing }
 RTCTuple >> =~ aRTCTuple [ 
 	^ (x =~ aRTCTuple x) & (y =~ aRTCTuple y) & (z =~ aRTCTuple z) & (w =~ aRTCTuple w). 
+]
+
+{ #category : #arithmetic }
+RTCTuple >> negated [
+	^ self class new x: x negated; y: y negated; z: z negated; w: w negated.
 ]
 
 { #category : #accessing }
