@@ -145,6 +145,43 @@ RTCTupleTest >> testNewVector [
 ]
 
 { #category : #'tests - arithmetic' }
+RTCTupleTest >> testNormalizeVectorMagnitude [
+
+	| v |
+	v := RTCTuple newVector
+		x: 1;
+		y: 2;
+		z: 3.
+	self assert: v normalized magnitude equals: 1.
+]
+
+{ #category : #'tests - arithmetic' }
+RTCTupleTest >> testNormalizeVector_1_2_3 [
+
+	| v result |
+	v := RTCTuple newVector
+		x: 1;
+		y: 2;
+		z: 3.
+	result := RTCTuple newVector
+		x: 0.26726;
+		y: 0.53452;
+		z: 0.80178.
+	self assert: v normalized equals: result.
+]
+
+{ #category : #'tests - arithmetic' }
+RTCTupleTest >> testNormalizeVector_4_0_0 [
+
+	| v |
+	v := RTCTuple newVector
+		x: 4;
+		y: 0;
+		z: 0.
+	self assert: v normalized equals: (RTCTuple newVector x: 1; y: 0; z: 0).
+]
+
+{ #category : #'tests - arithmetic' }
 RTCTupleTest >> testSubtractTwoPoints [
 	
 	| p1 p2 |

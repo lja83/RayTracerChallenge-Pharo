@@ -86,6 +86,18 @@ RTCTuple >> negated [
 	^ self class new x: x negated; y: y negated; z: z negated; w: w negated.
 ]
 
+{ #category : #arithmetic }
+RTCTuple >> normalized [
+
+	| magnitude |
+	magnitude := self magnitude.
+	^ self class new
+		x: x / magnitude;
+		y: y / magnitude;
+		z: z / magnitude;
+		w: w / magnitude.
+]
+
 { #category : #accessing }
 RTCTuple >> point [
 	^ w closeTo: 1.0
