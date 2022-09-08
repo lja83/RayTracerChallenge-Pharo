@@ -30,7 +30,16 @@ RTCTuple class >> newZeroVector [
 	^ self newVector x: 0; y: 0; z: 0.
 ]
 
-{ #category : #comparing }
+{ #category : #arithmetic }
+RTCTuple >> * aNumber [ 
+	^ self class new
+		x: x * aNumber;
+		y: y * aNumber;
+		z: z * aNumber;
+		w: w * aNumber.
+]
+
+{ #category : #arithmetic }
 RTCTuple >> + aRTCTuple [ 
 	^ self class new
 		x: x + aRTCTuple x;
@@ -39,13 +48,22 @@ RTCTuple >> + aRTCTuple [
 		w: w + aRTCTuple w.
 ]
 
-{ #category : #comparing }
+{ #category : #arithmetic }
 RTCTuple >> - aRTCTuple [ 
 	^ self class new
 		x: x - aRTCTuple x;
 		y: y - aRTCTuple y;
 		z: z - aRTCTuple z;
 		w: w - aRTCTuple w.
+]
+
+{ #category : #arithmetic }
+RTCTuple >> / aNumber [ 
+	^ self class new
+		x: x / aNumber;
+		y: y / aNumber;
+		z: z / aNumber;
+		w: w / aNumber.
 ]
 
 { #category : #comparing }
@@ -56,6 +74,11 @@ RTCTuple >> = aRTCTuple [
 { #category : #comparing }
 RTCTuple >> =~ aRTCTuple [ 
 	^ (x =~ aRTCTuple x) & (y =~ aRTCTuple y) & (z =~ aRTCTuple z) & (w =~ aRTCTuple w). 
+]
+
+{ #category : #arithmetic }
+RTCTuple >> magnitude [
+	^ ((x squared) + (y squared) + (z squared) + (w squared)) sqrt.
 ]
 
 { #category : #arithmetic }
