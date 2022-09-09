@@ -77,13 +77,30 @@ RTCTuple >> =~ aRTCTuple [
 ]
 
 { #category : #arithmetic }
+RTCTuple >> cross: aRTCTuple [ 
+	^ self class newVector
+		x: (y * aRTCTuple z) - (z * aRTCTuple y);
+		y: (z * aRTCTuple x) - (x * aRTCTuple z);
+		z: (x * aRTCTuple y) - (y * aRTCTuple x).
+]
+
+{ #category : #arithmetic }
+RTCTuple >> dot: aRTCTuple [ 
+	^ (x * aRTCTuple x) + (y * aRTCTuple y) + (z * aRTCTuple z) + (w * aRTCTuple w).
+]
+
+{ #category : #arithmetic }
 RTCTuple >> magnitude [
 	^ ((x squared) + (y squared) + (z squared) + (w squared)) sqrt.
 ]
 
 { #category : #arithmetic }
 RTCTuple >> negated [
-	^ self class new x: x negated; y: y negated; z: z negated; w: w negated.
+	^ self class new
+		x: x negated;
+		y: y negated;
+		z: z negated;
+		w: w negated.
 ]
 
 { #category : #arithmetic }

@@ -23,6 +23,16 @@ RTCTupleTest >> testAddTwoTuples [
 ]
 
 { #category : #'tests - arithmetic' }
+RTCTupleTest >> testCrossProductTwoVectors [
+
+	| a b |
+	a := RTCTuple newVector x: 1; y: 2; z: 3.
+	b := RTCTuple newVector x: 2; y: 3; z: 4.
+	self assert: (a cross: b) equals: (RTCTuple newVector x: -1; y: 2; z: -1).
+	self assert: (b cross: a) equals: (RTCTuple newVector x: 1; y: -2; z: 1).
+]
+
+{ #category : #'tests - arithmetic' }
 RTCTupleTest >> testDividingTupleByScalar [
 	
 	| a |
@@ -32,6 +42,15 @@ RTCTupleTest >> testDividingTupleByScalar [
 		z: 3;
 		w: -4.
 	self assert: (a / 2) equals: (RTCTuple new x: 0.5; y: -1; z: 1.5; w: -2).
+]
+
+{ #category : #'tests - arithmetic' }
+RTCTupleTest >> testDotProductTwoTuples [
+
+	| a b |
+	a := RTCTuple newVector x: 1; y: 2; z: 3.
+	b := RTCTuple newVector x: 2; y: 3; z: 4.
+	self assert: (a dot: b) equals: 20.
 ]
 
 { #category : #tests }
