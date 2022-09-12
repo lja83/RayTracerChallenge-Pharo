@@ -9,27 +9,19 @@ RTCTupleTest >> testAddTwoTuples [
 	"Adding two tuples"
 	
 	| a1 a2 |
-	a1 := RTCTuple new
-		x: 3;
-		y: -2;
-		z: 5;
-		w: 1.
-	a2 := RTCTuple new
-		x: -2;
-		y: 3;
-		z: 1;
-		w: 0.
-	self assert: (a1 + a2) equals: (RTCTuple new x: 1; y: 1; z: 6; w: 1).
+	a1 := RTCTuple newFrom: { 3. -2. 5. 1. }.
+	a2 := RTCTuple newFrom: { -2. 3. 1. 0. }.
+	self assert: (a1 + a2) equals: (RTCTuple newFrom: { 1. 1. 6. 1. }).
 ]
 
 { #category : #'tests - arithmetic' }
 RTCTupleTest >> testCrossProductTwoVectors [
 
 	| a b |
-	a := RTCTuple newVector x: 1; y: 2; z: 3.
-	b := RTCTuple newVector x: 2; y: 3; z: 4.
-	self assert: (a cross: b) equals: (RTCTuple newVector x: -1; y: 2; z: -1).
-	self assert: (b cross: a) equals: (RTCTuple newVector x: 1; y: -2; z: 1).
+	a := RTCTuple newFrom: { 1. 2. 3. }.
+	b := RTCTuple newFrom: { 2. 3. 4. }.
+	self assert: (a cross: b) equals: (RTCTuple newFrom: { -1. 2. -1. }).
+	self assert: (b cross: a) equals: (RTCTuple newFrom: { 1. -2. .1 }).
 ]
 
 { #category : #'tests - arithmetic' }
@@ -171,7 +163,7 @@ RTCTupleTest >> testNormalizeVectorMagnitude [
 		x: 1;
 		y: 2;
 		z: 3.
-	self assert: v normalized magnitude equals: 1.
+	self assert: v normalized magnitude closeTo: 1.
 ]
 
 { #category : #'tests - arithmetic' }
@@ -186,7 +178,7 @@ RTCTupleTest >> testNormalizeVector_1_2_3 [
 		x: 0.26726;
 		y: 0.53452;
 		z: 0.80178.
-	self assert: v normalized equals: result.
+	self assert: v normalized closeTo: result.
 ]
 
 { #category : #'tests - arithmetic' }
@@ -197,7 +189,7 @@ RTCTupleTest >> testNormalizeVector_4_0_0 [
 		x: 4;
 		y: 0;
 		z: 0.
-	self assert: v normalized equals: (RTCTuple newVector x: 1; y: 0; z: 0).
+	self assert: v normalized closeTo: (RTCTuple newVector x: 1; y: 0; z: 0).
 ]
 
 { #category : #'tests - arithmetic' }

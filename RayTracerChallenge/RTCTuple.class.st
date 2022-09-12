@@ -3,13 +3,8 @@ I am a tuple of numbers representing either an RTCPoint or an RTCVector.
 "
 Class {
 	#name : #RTCTuple,
-	#superclass : #Object,
-	#instVars : [
-		'x',
-		'y',
-		'z',
-		'w'
-	],
+	#superclass : #RTCFloatArray,
+	#type : #words,
 	#category : #RayTracerChallenge
 }
 
@@ -31,136 +26,75 @@ RTCTuple class >> newZeroVector [
 ]
 
 { #category : #arithmetic }
-RTCTuple >> * aNumber [ 
-	^ self class new
-		x: x * aNumber;
-		y: y * aNumber;
-		z: z * aNumber;
-		w: w * aNumber.
-]
-
-{ #category : #arithmetic }
-RTCTuple >> + aRTCTuple [ 
-	^ self class new
-		x: x + aRTCTuple x;
-		y: y + aRTCTuple y;
-		z: z + aRTCTuple z;
-		w: w + aRTCTuple w.
-]
-
-{ #category : #arithmetic }
-RTCTuple >> - aRTCTuple [ 
-	^ self class new
-		x: x - aRTCTuple x;
-		y: y - aRTCTuple y;
-		z: z - aRTCTuple z;
-		w: w - aRTCTuple w.
-]
-
-{ #category : #arithmetic }
-RTCTuple >> / aNumber [ 
-	^ self class new
-		x: x / aNumber;
-		y: y / aNumber;
-		z: z / aNumber;
-		w: w / aNumber.
-]
-
-{ #category : #comparing }
-RTCTuple >> = aRTCTuple [ 
-	^ (x =~ aRTCTuple x) & (y =~ aRTCTuple y) & (z =~ aRTCTuple z) & (w =~ aRTCTuple w). 
-]
-
-{ #category : #comparing }
-RTCTuple >> =~ aRTCTuple [ 
-	^ (x =~ aRTCTuple x) & (y =~ aRTCTuple y) & (z =~ aRTCTuple z) & (w =~ aRTCTuple w). 
-]
-
-{ #category : #arithmetic }
 RTCTuple >> cross: aRTCTuple [ 
 	^ self class newVector
-		x: (y * aRTCTuple z) - (z * aRTCTuple y);
-		y: (z * aRTCTuple x) - (x * aRTCTuple z);
-		z: (x * aRTCTuple y) - (y * aRTCTuple x).
+		x: (self y * aRTCTuple z) - (self z * aRTCTuple y);
+		y: (self z * aRTCTuple x) - (self x * aRTCTuple z);
+		z: (self x * aRTCTuple y) - (self y * aRTCTuple x).
 ]
 
 { #category : #arithmetic }
 RTCTuple >> dot: aRTCTuple [ 
-	^ (x * aRTCTuple x) + (y * aRTCTuple y) + (z * aRTCTuple z) + (w * aRTCTuple w).
+	^ (self x * (aRTCTuple x)) + (self y * (aRTCTuple y)) + (self z * (aRTCTuple z)) + (self w * (aRTCTuple w)).
 ]
 
 { #category : #arithmetic }
 RTCTuple >> magnitude [
-	^ ((x squared) + (y squared) + (z squared) + (w squared)) sqrt.
-]
-
-{ #category : #arithmetic }
-RTCTuple >> negated [
-	^ self class new
-		x: x negated;
-		y: y negated;
-		z: z negated;
-		w: w negated.
+	^ self squared sum sqrt.
 ]
 
 { #category : #arithmetic }
 RTCTuple >> normalized [
 
-	| magnitude |
-	magnitude := self magnitude.
-	^ self class new
-		x: x / magnitude;
-		y: y / magnitude;
-		z: z / magnitude;
-		w: w / magnitude.
+	^ self / (self magnitude).
 ]
 
 { #category : #accessing }
 RTCTuple >> point [
-	^ w closeTo: 1.0
+	^ self w closeTo: 1.0
 ]
 
 { #category : #accessing }
 RTCTuple >> vector [
-	^ w closeTo: 0.0
+	^ self w closeTo: 0.0
 ]
 
 { #category : #accessing }
 RTCTuple >> w [
-	^ w
+	^ self at: 4.
 ]
 
 { #category : #'accessing - structure variables' }
 RTCTuple >> w: aNumber [ 
-	w := aNumber.
+	self at: 4 put: aNumber.
 ]
 
 { #category : #accessing }
 RTCTuple >> x [
-	^ x
+	^ self at: 1.
 ]
 
 { #category : #'accessing - structure variables' }
 RTCTuple >> x: aNumber [ 
-	x := aNumber.
+	self at: 1 put: aNumber.
 ]
 
 { #category : #accessing }
 RTCTuple >> y [
-	^ y
+	^ self at: 2.
 ]
 
 { #category : #'accessing - structure variables' }
 RTCTuple >> y: aNumber [ 
-	y := aNumber.
+	self at: 2 put: aNumber.
 ]
 
 { #category : #accessing }
 RTCTuple >> z [
-	^ z
+	^ self at: 3.
 ]
 
 { #category : #'accessing - structure variables' }
 RTCTuple >> z: aNumber [ 
-	z := aNumber.
+	self at: 3 put: aNumber.
 ]
