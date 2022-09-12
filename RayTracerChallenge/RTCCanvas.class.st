@@ -14,8 +14,19 @@ RTCCanvas class >> rows: rowNumber columns: columnNumber [
 
 	| a |
 	a := super rows: rowNumber columns: columnNumber.
-	a contents atAllPut: (RTCColor newFrom: { 0. 0. 0. 0. }).
+	a contents atAllPut: (RTCColor new).
 	^ a.
+]
+
+{ #category : #converting }
+RTCCanvas >> asForm [
+
+	| f |
+	f := ColorForm extent: (self width @ self height) depth: 8.
+	0 to: self height - 1 do: [ :y |
+		0 to: self width - 1 do: [ :x |
+			f colorAt: x@y put: ((self at: x@y) asColor) ] ].
+	^ f.
 ]
 
 { #category : #accessing }

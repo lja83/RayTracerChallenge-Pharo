@@ -5,6 +5,15 @@ Class {
 }
 
 { #category : #tests }
+RTCCanvasTest >> testAsForm [
+
+	| c f |
+	c := RTCCanvas rows: 20 columns: 10.
+	f := c asForm.
+	self assert: (f colorAt: 0@0) equals: Color black.
+]
+
+{ #category : #tests }
 RTCCanvasTest >> testCreateCanvas [
 			
 	| c black |

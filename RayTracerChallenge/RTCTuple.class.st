@@ -9,6 +9,25 @@ Class {
 }
 
 { #category : #'instance creation' }
+RTCTuple class >> new [
+
+	^ self newFrom: { 0. 0. 0. 0. }
+]
+
+{ #category : #'instance creation' }
+RTCTuple class >> newFrom: aCollection [
+
+	| collection |
+	collection := self ofSize: 4.
+	1 to: 4 do: [ :i|
+		(aCollection size >= i)
+			ifTrue: [collection at: i put: (aCollection at: i)]
+			ifFalse: [ collection at: i put: 0. ].
+	].
+	^ collection.
+]
+
+{ #category : #'instance creation' }
 RTCTuple class >> newPoint [
 			
 	^ self new w: 1.0

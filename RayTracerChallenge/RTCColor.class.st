@@ -8,16 +8,25 @@ Class {
 	#category : #RayTracerChallenge
 }
 
-{ #category : #'accessing - structure variables' }
-RTCColor >> a [
+{ #category : #'instance creation' }
+RTCColor class >> fromColor: aColor [
 
-	^ self at: 4.
+	^ self new
+		r: aColor red;
+		g: aColor green;
+		b: aColor blue.
+]
+
+{ #category : #'instance creation' }
+RTCColor class >> new [
+
+	^ self newFrom: { 0. 0. 0. }
 ]
 
 { #category : #'accessing - structure variables' }
-RTCColor >> a: aNumber [
+RTCColor >> asColor [
 
-	self at: 4 put: aNumber.
+	^ Color r: self r g: self g b: self b alpha: 1.0.
 ]
 
 { #category : #'accessing - structure variables' }
