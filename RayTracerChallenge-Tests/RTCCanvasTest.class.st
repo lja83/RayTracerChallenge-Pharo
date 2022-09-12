@@ -14,6 +14,37 @@ RTCCanvasTest >> testAsForm [
 ]
 
 { #category : #tests }
+RTCCanvasTest >> testCanvasToPPM [
+
+	| c c1 c2 c3 ppm header lines |
+	c := RTCCanvas rows: 3 columns: 5.
+	c1 := RTCColor newFrom: { 1.5. 0. 0. }.
+	c2 := RTCColor newFrom: { 0. 0.5. 0. }.
+	c3 := RTCColor newFrom: { -0.5. 0. 1. }.
+	c
+		at: 0@0 put: c1;
+		at: 2@1 put: c2;
+		at: 4@2 put: c3.
+	ppm := c asPPM.
+	header := { 'P3'. '5 3'. '255' }.
+	lines := { '255 0 0 0 0 0 0 0 0 0 0 0 0 0 0'.
+	           '0 0 0 0 0 0 0 128 0 0 0 0 0 0 0'.
+	           '0 0 0 0 0 0 0 0 0 0 0 0 0 0 255'. }.
+	self assert: (ppm lines first: 3) equals: header.
+	self assert: (ppm lines allButFirst: 3) equals: lines.
+]
+
+{ #category : #tests }
+RTCCanvasTest >> testCanvasToPPMHeader [
+
+	| c ppm lines |
+	c := RTCCanvas rows: 3 columns: 5.
+	ppm := c asPPM.
+	lines := { 'P3'. '5 3'. '255'. }.
+	self assert: (ppm lines first: 3) equals: lines.
+]
+
+{ #category : #tests }
 RTCCanvasTest >> testCreateCanvas [
 			
 	| c black |
@@ -24,6 +55,15 @@ RTCCanvasTest >> testCreateCanvas [
 	1 to: c height do: [ :y |
 		1 to: c width do: [ :x |
 			self assert: (c at: y at: x) closeTo: black ] ]
+]
+
+{ #category : #tests }
+RTCCanvasTest >> testPPMEndsWithNewline [
+
+	| c ppm |
+	c := RTCCanvas rows: 3 columns: 5.
+	ppm := c asPPM.
+	self assert: ppm last equals: Character lf.
 ]
 
 { #category : #tests }

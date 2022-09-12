@@ -14,6 +14,15 @@ RTCColorTest >> testAddColors [
 ]
 
 { #category : #tests }
+RTCColorTest >> testFloatToIntArray [
+
+	| c1 |
+	c1 := RTCColor new r: 1.0; g: 0.5; b: 0.
+	self assert: c1 asIntegerArray equals: { 255. 128. 0. }.
+	
+]
+
+{ #category : #tests }
 RTCColorTest >> testMultiplyColorByColor [
 
 	| c1 c2 |

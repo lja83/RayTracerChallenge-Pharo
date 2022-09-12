@@ -29,6 +29,14 @@ RTCColor >> asColor [
 	^ Color r: self r g: self g b: self b alpha: 1.0.
 ]
 
+{ #category : #converting }
+RTCColor >> asIntegerArray [
+
+	^ { (self r * 255) rounded asInteger beBetween: 0 and: 255.
+	    (self g * 255) rounded asInteger beBetween: 0 and: 255.
+	    (self b * 255) rounded asInteger beBetween: 0 and: 255. }.
+]
+
 { #category : #'accessing - structure variables' }
 RTCColor >> b [
 

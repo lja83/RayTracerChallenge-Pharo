@@ -29,6 +29,40 @@ RTCCanvas >> asForm [
 	^ f.
 ]
 
+{ #category : #converting }
+RTCCanvas >> asMorph [
+
+	^ self asForm asMorph.
+]
+
+{ #category : #converting }
+RTCCanvas >> asPPM [
+
+	| stream headerLines |
+	stream := WriteStream on: (String new).
+	headerLines := {
+		'P3'.
+		self width asString , ' ' , self height asString.
+		'255'
+	}.
+	headerLines do: [ :line |
+		stream nextPutAll: line; lf ].
+	1 to: numberOfRows do: [ :row |
+		| colorStrings |
+		colorStrings := OrderedCollection new.
+		1 to: numberOfColumns do: [ :column |
+			| stringArray |
+			stringArray :=
+				(self at: row at: column)        "Get the RTCCOlor"
+				asIntegerArray                   "Convert to array of values from 0-255"
+				collect: [ :i | i asString ].    "Convert to array of strings"
+			colorStrings add: (' ' join: stringArray).
+		].
+		stream nextPutAll: (' ' join: colorStrings); lf.
+	].
+	^ stream contents.
+]
+
 { #category : #accessing }
 RTCCanvas >> at: aPoint [
 
