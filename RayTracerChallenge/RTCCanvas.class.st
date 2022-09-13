@@ -38,28 +38,39 @@ RTCCanvas >> asMorph [
 { #category : #converting }
 RTCCanvas >> asPPM [
 
-	| stream headerLines |
+	| stream |
 	stream := WriteStream on: (String new).
-	headerLines := {
-		'P3'.
-		self width asString , ' ' , self height asString.
-		'255'
-	}.
-	headerLines do: [ :line |
-		stream nextPutAll: line; lf ].
+
+	" header "
+	stream
+		nextPutAll: 'P3'; lf;
+		nextPutAll: self width asString;
+		nextPutAll: ' ';
+		nextPutAll: self height asString; lf;
+		nextPutAll: '255'; lf.
+
+	" data "
 	1 to: numberOfRows do: [ :row |
 		| colorStrings |
+
 		colorStrings := OrderedCollection new.
 		1 to: numberOfColumns do: [ :column |
 			| stringArray |
-			stringArray :=
+			stringArray :=                      "Array of strings representing integer values from 0-255"
 				(self at: row at: column)        "Get the RTCCOlor"
 				asIntegerArray                   "Convert to array of values from 0-255"
 				collect: [ :i | i asString ].    "Convert to array of strings"
-			colorStrings add: (' ' join: stringArray).
-		].
-		stream nextPutAll: (' ' join: colorStrings); lf.
-	].
+			colorStrings addAll: stringArray ].
+		
+		colorStrings withIndexCollect: [ :s :i |
+			stream nextPutAll: s.
+			i % 17 = 0                          "maximum 17 numbers per line to avoid exceeding 70 chars"
+				ifTrue: [ stream lf. ]
+				ifFalse: [
+					i < colorStrings size         "last line gets line feed instead of space"
+						ifTrue: [ stream nextPutAll: ' ' ]
+						ifFalse: [ stream lf ] ] ] ].
+
 	^ stream contents.
 ]
 

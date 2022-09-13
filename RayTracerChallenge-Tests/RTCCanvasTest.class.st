@@ -13,7 +13,7 @@ RTCCanvasTest >> testAsForm [
 	self assert: (f colorAt: 0@0) equals: Color black.
 ]
 
-{ #category : #tests }
+{ #category : #'tests - ppm' }
 RTCCanvasTest >> testCanvasToPPM [
 
 	| c c1 c2 c3 ppm header lines |
@@ -34,7 +34,7 @@ RTCCanvasTest >> testCanvasToPPM [
 	self assert: (ppm lines allButFirst: 3) equals: lines.
 ]
 
-{ #category : #tests }
+{ #category : #'tests - ppm' }
 RTCCanvasTest >> testCanvasToPPMHeader [
 
 	| c ppm lines |
@@ -57,13 +57,29 @@ RTCCanvasTest >> testCreateCanvas [
 			self assert: (c at: y at: x) closeTo: black ] ]
 ]
 
-{ #category : #tests }
+{ #category : #'tests - ppm' }
 RTCCanvasTest >> testPPMEndsWithNewline [
 
 	| c ppm |
 	c := RTCCanvas rows: 3 columns: 5.
 	ppm := c asPPM.
 	self assert: ppm last equals: Character lf.
+]
+
+{ #category : #'tests - ppm' }
+RTCCanvasTest >> testSplitLongLines [
+
+	| c ppm header lines |
+	c := RTCCanvas rows: 2 columns: 10.
+	c atAllPut: (RTCColor newFrom: { 1. 0.8. 0.6. }).
+	ppm := c asPPM.
+	header := { 'P3'. '10 2'. '255' }.
+	lines := { '255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204'.
+	           '153 255 204 153 255 204 153 255 204 153 255 204 153'.
+	           '255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204'.
+	           '153 255 204 153 255 204 153 255 204 153 255 204 153'. }.
+	self assert: (ppm lines first: 3) equals: header.
+	self assert: (ppm lines allButFirst: 3) equals: lines.
 ]
 
 { #category : #tests }
