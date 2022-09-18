@@ -4,7 +4,6 @@ I represent a color with alpha channel
 Class {
 	#name : #RTCColor,
 	#superclass : #RTCFloatArray,
-	#type : #words,
 	#category : #RayTracerChallenge
 }
 
@@ -15,12 +14,6 @@ RTCColor class >> fromColor: aColor [
 		r: aColor red;
 		g: aColor green;
 		b: aColor blue.
-]
-
-{ #category : #'instance creation' }
-RTCColor class >> new [
-
-	^ self newFrom: { 0. 0. 0. }
 ]
 
 { #category : #'accessing - structure variables' }
@@ -40,7 +33,7 @@ RTCColor >> asIntegerArray [
 { #category : #'accessing - structure variables' }
 RTCColor >> b [
 
-	^ self at: 3.
+	^ array at: 3.
 ]
 
 { #category : #'accessing - structure variables' }
@@ -52,7 +45,7 @@ RTCColor >> b: aNumber [
 { #category : #'accessing - structure variables' }
 RTCColor >> g [
 
-	^ self at: 2.
+	^ array at: 2.
 ]
 
 { #category : #'accessing - structure variables' }
@@ -61,10 +54,16 @@ RTCColor >> g: aNumber [
 	self at: 2 put: aNumber.
 ]
 
+{ #category : #initialization }
+RTCColor >> initialize [
+
+	array := FloatArray ofSize: 3.
+]
+
 { #category : #'accessing - structure variables' }
 RTCColor >> r [
 
-	^ self at: 1.
+	^ array at: 1.
 ]
 
 { #category : #'accessing - structure variables' }

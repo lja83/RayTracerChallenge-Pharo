@@ -4,7 +4,6 @@ I am a tuple of numbers representing either an RTCPoint or an RTCVector.
 Class {
 	#name : #RTCTuple,
 	#superclass : #RTCFloatArray,
-	#type : #words,
 	#category : #RayTracerChallenge
 }
 
@@ -59,7 +58,7 @@ RTCTuple >> dot: aRTCTuple [
 
 { #category : #arithmetic }
 RTCTuple >> magnitude [
-	^ self squared sum sqrt.
+	^ self array squared sum sqrt.
 ]
 
 { #category : #arithmetic }
