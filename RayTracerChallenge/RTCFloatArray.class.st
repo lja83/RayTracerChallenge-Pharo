@@ -47,6 +47,12 @@ RTCFloatArray >> / aNumber [
 	^ self class newFrom: (array / aNumber)
 ]
 
+{ #category : #comparing }
+RTCFloatArray >> = aRTCFloatArray [
+
+	^ array closeTo: aRTCFloatArray array.
+]
+
 { #category : #accessing }
 RTCFloatArray >> array [
 	^ array
@@ -72,6 +78,12 @@ RTCFloatArray >> closeTo: aCollection precision: aNumber [
 
 	^ (1 to: self size) allSatisfy: [ :i | 
 		  (self at: i) closeTo: (aCollection at: i) precision: aNumber ]
+]
+
+{ #category : #comparing }
+RTCFloatArray >> hash [
+
+	self shouldNotImplement.
 ]
 
 { #category : #arithmetic }

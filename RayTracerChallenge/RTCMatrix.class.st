@@ -40,6 +40,11 @@ RTCMatrix >> columns: anInteger [
 ]
 
 { #category : #accessing }
+RTCMatrix >> data: aCollection [ 
+	self array: aCollection.
+]
+
+{ #category : #accessing }
 RTCMatrix >> indexAt: anObject [
 
 	| index |

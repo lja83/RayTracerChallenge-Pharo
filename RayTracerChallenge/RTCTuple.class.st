@@ -8,22 +8,16 @@ Class {
 }
 
 { #category : #'instance creation' }
-RTCTuple class >> new [
-
-	^ self newFrom: { 0. 0. 0. 0. }
-]
-
-{ #category : #'instance creation' }
 RTCTuple class >> newFrom: aCollection [
 
 	| collection |
-	collection := self ofSize: 4.
+	collection := FloatArray ofSize: 4.
 	1 to: 4 do: [ :i|
 		(aCollection size >= i)
 			ifTrue: [collection at: i put: (aCollection at: i)]
 			ifFalse: [ collection at: i put: 0. ].
 	].
-	^ collection.
+	^ super newFrom: collection.
 ]
 
 { #category : #'instance creation' }
@@ -54,6 +48,13 @@ RTCTuple >> cross: aRTCTuple [
 { #category : #arithmetic }
 RTCTuple >> dot: aRTCTuple [ 
 	^ (self x * (aRTCTuple x)) + (self y * (aRTCTuple y)) + (self z * (aRTCTuple z)) + (self w * (aRTCTuple w)).
+]
+
+{ #category : #initialization }
+RTCTuple >> initialize [
+	
+	super initialize.
+	array := FloatArray newFrom: { 0. 0. 0. 0. }.
 ]
 
 { #category : #arithmetic }
