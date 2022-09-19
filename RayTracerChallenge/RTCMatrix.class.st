@@ -40,7 +40,9 @@ RTCMatrix >> columns: anInteger [
 ]
 
 { #category : #accessing }
-RTCMatrix >> data: aCollection [ 
+RTCMatrix >> data: aCollection [
+	(aCollection size = (rows * columns))
+		ifFalse: [ SizeMismatch signal. ].
 	self array: aCollection.
 ]
 

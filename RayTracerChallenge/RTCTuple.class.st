@@ -20,34 +20,16 @@ RTCTuple class >> newFrom: aCollection [
 	^ super newFrom: collection.
 ]
 
-{ #category : #'instance creation' }
-RTCTuple class >> newPoint [
-			
-	^ self new w: 1.0
-]
-
-{ #category : #'instance creation' }
-RTCTuple class >> newVector [
-			
-	^ self new w: 0.0
-]
-
-{ #category : #'instance creation' }
-RTCTuple class >> newZeroVector [
-	^ self newVector x: 0; y: 0; z: 0.
-]
-
 { #category : #arithmetic }
-RTCTuple >> cross: aRTCTuple [ 
-	^ self class newVector
-		x: (self y * aRTCTuple z) - (self z * aRTCTuple y);
-		y: (self z * aRTCTuple x) - (self x * aRTCTuple z);
-		z: (self x * aRTCTuple y) - (self y * aRTCTuple x).
-]
+RTCTuple >> - aPoint [
 
-{ #category : #arithmetic }
-RTCTuple >> dot: aRTCTuple [ 
-	^ (self x * (aRTCTuple x)) + (self y * (aRTCTuple y)) + (self z * (aRTCTuple z)) + (self w * (aRTCTuple w)).
+	| r |
+	r := super - aPoint.
+	(r w closeTo: 0)
+		ifTrue: [ ^ RTCVector newFrom: r ].
+	(r w closeTo: 1)
+		ifTrue: [ ^ RTCPoint newFrom: r ].
+	^ self class newFrom: r.
 ]
 
 { #category : #initialization }
@@ -57,25 +39,14 @@ RTCTuple >> initialize [
 	array := FloatArray newFrom: { 0. 0. 0. 0. }.
 ]
 
-{ #category : #arithmetic }
-RTCTuple >> magnitude [
-	^ self array squared sum sqrt.
-]
-
-{ #category : #arithmetic }
-RTCTuple >> normalized [
-
-	^ self / (self magnitude).
-]
-
 { #category : #accessing }
 RTCTuple >> point [
-	^ self w closeTo: 1.0
+	^ self w closeTo: 1.
 ]
 
 { #category : #accessing }
 RTCTuple >> vector [
-	^ self w closeTo: 0.0
+	^ self w closeTo: 0.
 ]
 
 { #category : #accessing }

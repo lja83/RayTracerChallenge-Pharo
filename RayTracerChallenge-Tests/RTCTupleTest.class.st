@@ -18,10 +18,10 @@ RTCTupleTest >> testAddTwoTuples [
 RTCTupleTest >> testCrossProductTwoVectors [
 
 	| a b |
-	a := RTCTuple newFrom: { 1. 2. 3. }.
-	b := RTCTuple newFrom: { 2. 3. 4. }.
-	self assert: (a cross: b) equals: (RTCTuple newFrom: { -1. 2. -1. }).
-	self assert: (b cross: a) equals: (RTCTuple newFrom: { 1. -2. .1 }).
+	a := RTCVector newFrom: { 1. 2. 3. }.
+	b := RTCVector newFrom: { 2. 3. 4. }.
+	self assert: (a cross: b) equals: (RTCVector newFrom: { -1. 2. -1. }).
+	self assert: (b cross: a) equals: (RTCVector newFrom: { 1. -2. .1 }).
 ]
 
 { #category : #'tests - arithmetic' }
@@ -40,8 +40,8 @@ RTCTupleTest >> testDividingTupleByScalar [
 RTCTupleTest >> testDotProductTwoTuples [
 
 	| a b |
-	a := RTCTuple newVector x: 1; y: 2; z: 3.
-	b := RTCTuple newVector x: 2; y: 3; z: 4.
+	a := RTCVector new x: 1; y: 2; z: 3.
+	b := RTCVector new x: 2; y: 3; z: 4.
 	self assert: (a dot: b) equals: 20.
 ]
 
@@ -49,7 +49,7 @@ RTCTupleTest >> testDotProductTwoTuples [
 RTCTupleTest >> testMagnitudeofVector_0_0_1 [
 			
 	| v |
-	v := RTCTuple newVector x: 0; y: 0; z: 1.
+	v := RTCVector new x: 0; y: 0; z: 1.
 	self assert: v magnitude closeTo: 1.0.
 ]
 
@@ -57,7 +57,7 @@ RTCTupleTest >> testMagnitudeofVector_0_0_1 [
 RTCTupleTest >> testMagnitudeofVector_0_1_0 [
 			
 	| v |
-	v := RTCTuple newVector x: 0; y: 1; z: 0.
+	v := RTCVector new x: 0; y: 1; z: 0.
 	self assert: v magnitude closeTo: 1.0.
 ]
 
@@ -65,7 +65,7 @@ RTCTupleTest >> testMagnitudeofVector_0_1_0 [
 RTCTupleTest >> testMagnitudeofVector_1_0_0 [
 			
 	| v |
-	v := RTCTuple newVector x: 1; y: 0; z: 0.
+	v := RTCVector new x: 1; y: 0; z: 0.
 	self assert: v magnitude closeTo: 1.0.
 ]
 
@@ -73,7 +73,7 @@ RTCTupleTest >> testMagnitudeofVector_1_0_0 [
 RTCTupleTest >> testMagnitudeofVector_1_2_3 [
 			
 	| v |
-	v := RTCTuple newVector x: 1; y: 2; z: 3.
+	v := RTCVector new x: 1; y: 2; z: 3.
 	self assert: v magnitude closeTo: 14 sqrt.
 ]
 
@@ -81,7 +81,7 @@ RTCTupleTest >> testMagnitudeofVector_1_2_3 [
 RTCTupleTest >> testMagnitudeofVector_n1_n2_n3 [
 			
 	| v |
-	v := RTCTuple newVector x: -1; y: -2; z: -3.
+	v := RTCVector new x: -1; y: -2; z: -3.
 	self assert: v magnitude closeTo: 14 sqrt.
 ]
 
@@ -94,7 +94,7 @@ RTCTupleTest >> testMultiplyingTupleByAFraction [
 		y: -2;
 		z: 3;
 		w: -4.
-	self assert: (a * 0.5) equals: (RTCTuple newVector x: 0.5; y: -1; z: 1.5; w: -2).
+	self assert: (a * 0.5) equals: (RTCVector new x: 0.5; y: -1; z: 1.5; w: -2).
 ]
 
 { #category : #'tests - arithmetic' }
@@ -106,7 +106,7 @@ RTCTupleTest >> testMultiplyingTupleByScalar [
 		y: -2;
 		z: 3;
 		w: -4.
-	self assert: (a * 3.5) equals: (RTCTuple newVector x: 3.5; y: -7; z: 10.5; w: -14).
+	self assert: (a * 3.5) equals: (RTCTuple new x: 3.5; y: -7; z: 10.5; w: -14).
 ]
 
 { #category : #'tests - arithmetic' }
@@ -118,7 +118,7 @@ RTCTupleTest >> testNegatingATuple [
 		y: -2;
 		z: 3;
 		w: -4.
-	self assert: (a negated) equals: (RTCTuple newVector x: -1; y: 2; z: -3; w: 4).
+	self assert: (a negated) equals: (RTCTuple new x: -1; y: 2; z: -3; w: 4).
 ]
 
 { #category : #tests }
@@ -126,11 +126,11 @@ RTCTupleTest >> testNewPoint [
 	"A tuple with w = 1.0 is a point"
 	
 	| p p2 |
-	p := RTCTuple newPoint
+	p := RTCPoint new
 			x: 4.3;
 			y: -4.2;
 			z: 3.1.
-	p2 := RTCTuple new
+	p2 := RTCPoint new
 			x: 4.3;
 			y: -4.2;
 			z: 3.1;
@@ -140,18 +140,19 @@ RTCTupleTest >> testNewPoint [
 
 { #category : #tests }
 RTCTupleTest >> testNewVector [
-	"A tuple with w = 1.0 is a point"
+	"A tuple with w = 0.0 is a vector"
 	
 	| v v2 |
-	v := RTCTuple newVector
+	v := RTCVector new
 			x: 4.3;
 			y: -4.2;
 			z: 3.1.
-	v2 := RTCTuple new
+	v2 := RTCVector new
 			x: 4.3;
 			y: -4.2;
 			z: 3.1;
 			w: 0.0.
+	self assert: v vector.
 	self assert: v equals: v2
 ]
 
@@ -159,7 +160,7 @@ RTCTupleTest >> testNewVector [
 RTCTupleTest >> testNormalizeVectorMagnitude [
 
 	| v |
-	v := RTCTuple newVector
+	v := RTCVector new
 		x: 1;
 		y: 2;
 		z: 3.
@@ -170,11 +171,11 @@ RTCTupleTest >> testNormalizeVectorMagnitude [
 RTCTupleTest >> testNormalizeVector_1_2_3 [
 
 	| v result |
-	v := RTCTuple newVector
+	v := RTCVector new
 		x: 1;
 		y: 2;
 		z: 3.
-	result := RTCTuple newVector
+	result := RTCVector new
 		x: 0.26726;
 		y: 0.53452;
 		z: 0.80178.
@@ -185,26 +186,28 @@ RTCTupleTest >> testNormalizeVector_1_2_3 [
 RTCTupleTest >> testNormalizeVector_4_0_0 [
 
 	| v |
-	v := RTCTuple newVector
+	v := RTCVector new
 		x: 4;
 		y: 0;
 		z: 0.
-	self assert: v normalized closeTo: (RTCTuple newVector x: 1; y: 0; z: 0).
+	self assert: v normalized closeTo: (RTCVector new x: 1; y: 0; z: 0).
 ]
 
 { #category : #'tests - arithmetic' }
 RTCTupleTest >> testSubtractTwoPoints [
 	
-	| p1 p2 |
-	p1 := RTCTuple newPoint
+	| p1 p2 r |
+	p1 := RTCPoint new
 		x: 3;
 		y: 2;
 		z: 1.
-	p2 := RTCTuple newPoint
+	p2 := RTCPoint new
 		x: 5;
 		y: 6;
 		z: 7.
-	self assert: (p1 - p2) equals: (RTCTuple newVector x: -2; y: -4; z: -6).
+	r := p1 - p2.
+	self assert: r vector.
+	self assert: r equals: (RTCVector new x: -2; y: -4; z: -6).
 ]
 
 { #category : #'tests - arithmetic' }
@@ -212,42 +215,44 @@ RTCTupleTest >> testSubtractTwoVectors [
 	"Subtracing two vectors should produce a new vector"
 	
 	| v1 v2 |
-	v1 := RTCTuple newVector
+	v1 := RTCVector new
 		x: 3;
 		y: 2;
 		z: 1.
-	v2 := RTCTuple newVector
+	v2 := RTCVector new
 		x: 5;
 		y: 6;
 		z: 7.
-	self assert: (v1 - v2) equals: (RTCTuple newVector x: -2; y: -4; z: -6).
+	self assert: (v1 - v2) equals: (RTCVector new x: -2; y: -4; z: -6).
 ]
 
 { #category : #'tests - arithmetic' }
 RTCTupleTest >> testSubtractVectorFromPoint [
 	"Subtracing a vector from a point should produce a new point"
 	
-	| p1 v2 |
-	p1 := RTCTuple newPoint
+	| p1 v2 r |
+	p1 := RTCPoint new
 		x: 3;
 		y: 2;
 		z: 1.
-	v2 := RTCTuple newVector
+	v2 := RTCVector new
 		x: 5;
 		y: 6;
 		z: 7.
-	self assert: (p1 - v2) equals: (RTCTuple newPoint x: -2; y: -4; z: -6).
+	r := p1 - v2.
+	self assert: r point.
+	self assert: r equals: (RTCPoint new x: -2; y: -4; z: -6).
 ]
 
 { #category : #'tests - arithmetic' }
 RTCTupleTest >> testSubtractVectorFromZeroVector [
 	
 	| v |
-	v := RTCTuple newVector
+	v := RTCVector new
 		x: 1;
 		y: -2;
 		z: 3.
-	self assert: (RTCTuple newZeroVector - v) equals: (RTCTuple newVector x: -1; y: 2; z: -3).
+	self assert: (RTCVector newZeroVector - v) equals: (RTCVector new x: -1; y: 2; z: -3).
 ]
 
 { #category : #tests }
