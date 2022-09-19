@@ -25,6 +25,13 @@ RTCVector >> dot: aRTCTuple [
 	^ (self x * (aRTCTuple x)) + (self y * (aRTCTuple y)) + (self z * (aRTCTuple z)) + (self w * (aRTCTuple w)).
 ]
 
+{ #category : #initialization }
+RTCVector >> initialize [
+
+	super initialize.
+	self w: 0.0.
+]
+
 { #category : #arithmetic }
 RTCVector >> magnitude [
 	^ self array squared sum sqrt.
