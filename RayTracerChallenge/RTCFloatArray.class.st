@@ -91,6 +91,13 @@ RTCFloatArray >> negated [
 	^ self class newFrom: (array negated)
 ]
 
+{ #category : #printing }
+RTCFloatArray >> printOn: aStream [
+
+	super printOn: aStream.
+	array printElementsOn: aStream.
+]
+
 { #category : #accessing }
 RTCFloatArray >> size [
 	^ array size.

@@ -3,7 +3,7 @@ I am a tuple of numbers representing either an RTCPoint or an RTCVector.
 "
 Class {
 	#name : #RTCTuple,
-	#superclass : #RTCFloatArray,
+	#superclass : #RTCMatrix,
 	#category : #RayTracerChallenge
 }
 
@@ -17,7 +17,7 @@ RTCTuple class >> newFrom: aCollection [
 			ifTrue: [collection at: i put: (aCollection at: i)]
 			ifFalse: [ collection at: i put: 0. ].
 	].
-	^ super newFrom: collection.
+	^ super newFrom: collection
 ]
 
 { #category : #arithmetic }
@@ -37,6 +37,8 @@ RTCTuple >> initialize [
 	
 	super initialize.
 	array := FloatArray newFrom: { 0. 0. 0. 0. }.
+	rows := 4.
+	columns := 1.
 ]
 
 { #category : #accessing }
