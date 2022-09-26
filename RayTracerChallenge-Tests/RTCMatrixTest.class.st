@@ -154,3 +154,26 @@ RTCMatrixTest >> testSetWrongData [
 	        1.  2. }.
 	self should: [ m data: d ] raise: SizeMismatch.
 ]
+
+{ #category : #tests }
+RTCMatrixTest >> testTransposeIdentity [
+
+	self assert: RTCMatrix identity transposed equals: RTCMatrix identity.
+]
+
+{ #category : #tests }
+RTCMatrixTest >> testTransposeMatrix [
+
+	| m t |
+	m := RTCMatrix rows: 4 columns: 4.
+	m data: { 0. 9. 3. 0.
+	          9. 8. 0. 8.
+	          1. 8. 5. 3.
+	          0. 0. 5. 8. }.
+	t := RTCMatrix rows: 4 columns: 4.
+	t data: { 0. 9. 1. 0.
+	          9. 8. 8. 0.
+	          3. 0. 5. 5.
+	          0. 8. 3. 8. }.
+	self assert: m transposed equals: t.
+]

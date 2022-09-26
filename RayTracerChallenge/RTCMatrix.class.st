@@ -116,3 +116,16 @@ RTCMatrix >> rows [
 RTCMatrix >> rows: anInteger [ 
 	rows := anInteger
 ]
+
+{ #category : #'point functions' }
+RTCMatrix >> transposed [
+
+	| result |
+	result := self class rows: columns columns: rows.
+	array withIndexDo: [ :e :i |
+		| row col |
+		row := self rowAt: i.
+		col := self columnAt: i.
+		result at: col@row put: (self at: row@col) ].
+	^ result.
+]
